@@ -5,6 +5,8 @@ const merge = require('webpack-merge');
 const commonConfig = merge([
   parts.loadJavascript(),
   parts.loadStyles(),
+  // parts.loadMarkdown(),
+  parts.loadRaw(),
 ]);
 
 const developmentConfig = merge([
@@ -25,6 +27,7 @@ const developmentConfig = merge([
   }),
 
   parts.HtmlWebpackPlugin(),
+  // parts.loadMarkdown(),
 ]);
 
 const productionConfig = merge([{
@@ -43,4 +46,4 @@ module.exports = (env) => {
     return merge([commonConfig, productionConfig]);
   }
   return merge([commonConfig, developmentConfig]);
-}
+};

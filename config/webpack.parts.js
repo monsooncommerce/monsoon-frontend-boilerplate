@@ -17,6 +17,40 @@ exports.loadJavascript = ({include, exclude} = {}) => ({
   },
 });
 
+// exports.loadMarkdown = ({include, exclude} = {}) => ({
+//   module: {
+//     rules: [
+//       {
+//         test: /\.md$/,
+//         include,
+//         exclude,
+//         use: [
+//           {
+//             loader: "html-loader"
+//           },
+//           {
+//             loader: "markdown-loader",
+//             options: {
+//             }
+//           }
+//         ],
+//       }
+//     ]
+//   }
+// });
+
+exports.loadRaw = ({include, exclude} = {}) => ({
+  module: {
+      rules: [
+        {
+          test: /\.md$/,
+          include,
+          exclude,
+          use: 'raw-loader'
+        }
+      ]
+    }
+});
 
 // STYLES
 
@@ -24,7 +58,7 @@ exports.autoprefix = () => ({
   loader: 'postcss-loader',
   options: {
     plugins: () => ([
-      require('autoprefixer')(),
+      require('autoprefixer')()
     ]),
   },
 });
@@ -37,18 +71,18 @@ exports.loadStyles = ({include, exclude} = {}) => ({
         include,
         exclude,
         use: [
-          { loader: 'style-loader', options: {sourceMap: true,}},
-          { loader: 'css-loader', options: {sourceMap: true, modules: true},},
+          { loader: 'style-loader', options: {sourceMap: true}},
+          { loader: 'css-loader', options: {sourceMap: true, modules: false}},
           {
             loader: 'postcss-loader',
             options: {
               plugins: () => ([
-                require('autoprefixer')(),
+                require('autoprefixer')()
               ]),
             },
           },
-          { loader: 'resolve-url-loader',},
-          { loader: 'sass-loader', options: {sourceMap: true},},
+          { loader: 'resolve-url-loader'},
+          { loader: 'sass-loader', options: {sourceMap: true}}
         ]
       }
     ]
@@ -67,7 +101,7 @@ exports.devServer = ({host, port} = {}) => ({
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
 });
 
@@ -75,6 +109,6 @@ exports.devServer = ({host, port} = {}) => ({
 
 exports.HtmlWebpackPlugin = () => ({
   plugins: [
-    new HtmlWebpackPlugin({ title: 'NPM Lib Boiler'}),
+    new HtmlWebpackPlugin({ title: 'NPM Lib Boiler'})
   ]
 });
