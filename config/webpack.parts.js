@@ -64,30 +64,66 @@ exports.autoprefix = () => ({
 });
 
 exports.loadStyles = ({include, exclude} = {}) => ({
-  module: {
-    rules: [
-      {
-        test: /\.(css|scss)$/,
-        include,
-        exclude,
-        use: [
-          { loader: 'style-loader', options: {sourceMap: true}},
-          { loader: 'css-loader', options: {sourceMap: true, modules: false}},
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => ([
-                require('autoprefixer')()
-              ]),
-            },
-          },
-          { loader: 'resolve-url-loader'},
-          { loader: 'sass-loader', options: {sourceMap: true}}
-        ]
-      }
+   module: {
+     rules: [
+       {
+         test: /\.(css|scss)$/,
+         include,
+         exclude,
+         use: [
+           { loader: 'style-loader', options: {sourceMap: true}},
+           { loader: 'css-loader', options: {sourceMap: true, modules: false}},
+           {
+             loader: 'postcss-loader',
+             options: {
+               plugins: () => ([
+                 require('autoprefixer')()
+               ]),
+             },
+           },
+           { loader: 'resolve-url-loader'},
+           { loader: 'sass-loader', options: {
+             sourceMap: true,
+             includePaths: ['node_modules', 'src', '.']
+           }}
+         ]
+       }
+     ]
+   }
+ }
+);
+
+exports.extractCSS = () => {
+  // Output extracted CSS to a file
+  const plugin = new ExtractTextPlugin({
+    // `allChunks` is needed with CommonsChunkPlugin to extract
+    // from extracted chunks as well.
+    allChunks: true,
+    filename: "[name].css",
+  });
+
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['css-loader', 'sass-loader']
+          })
+        }
+      ]
+    },
+    plugins: [
+      new ExtractTextPlugin('style.css')
+      //if you want to pass in options, you can do so:
+      //new ExtractTextPlugin({
+      //  filename: 'style.css'
+      //})
     ]
-  }
-});
+  };
+};
+
 
 // DEV SERVER
 

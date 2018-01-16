@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import createStore from './makeStore';
-
 import { containers as duckContainers } from './duck';
+import createStore from './createStore';
+import './index.scss';
 
-
+const store = createStore();
 
 class App extends React.Component {
   constructor(props) {
@@ -15,10 +15,10 @@ class App extends React.Component {
 
   render() {
     return(
-      <Provider store={createStore()}>
+      <Provider store={store}>
         <Router>
           <div>
-            < duckContainers.DuckContainer />
+            <duckContainers.DuckContainer />
           </div>
         </Router>
       </Provider>

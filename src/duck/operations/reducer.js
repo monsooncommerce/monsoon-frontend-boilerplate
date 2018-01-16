@@ -1,8 +1,9 @@
-const main = (state = {}, action) => {
+const main = (state = {loading: true}, action) => {
   switch (action.type) {
-    case "GET_REPORT":
-      const { data } = action.payload;
-      return {...state, data};
+    case "USER_FETCH_SUCCEEDED":
+      const { user } = action;
+      console.log(user);
+      return {...state, user, loading: false};
     default:
       return state;
   }
