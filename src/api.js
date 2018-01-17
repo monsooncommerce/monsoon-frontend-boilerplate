@@ -14,10 +14,13 @@ const apiConfig = {
   }
 };
 
-const requestFactory = (config) => (key) => (options) => {
-  const jwt = localStorage.getItem('jwt');
-  return config[key](request, options)
-    .set('X-JWT', jwt)
+const requestFactory = (config) => (key, options) => {
+  // const jwt = localStorage.getItem('jwt');
+  // return config[key](request, options)
+    // .set('X-JWT', jwt)
 };
 
-export default requestFactory(apiConfig);
+const func = () => ({});
+
+// export default requestFactory(apiConfig);
+export default func;
