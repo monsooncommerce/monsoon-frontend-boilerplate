@@ -6,6 +6,7 @@ const commonConfig = merge([
   parts.loadJavascript(),
   // parts.loadMarkdown(),
   parts.loadRaw(),
+
 ]);
 
 const developmentConfig = merge([
@@ -41,7 +42,15 @@ const productionConfig = merge([
       libraryTarget: 'commonjs2'
     },
   },
-  parts.extractCSS()
+  parts.extractCSS({ use: [
+    'css-loader',
+    parts.autoprefix(),
+    { loader: 'sass-loader',
+      options: {
+        includePaths: ['node_modules', 'src', '.']
+      }
+    }
+  ]})
 ]);
 
 module.exports = (env) => {

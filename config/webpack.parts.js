@@ -93,7 +93,7 @@ exports.loadStyles = ({include, exclude} = {}) => ({
  }
 );
 
-exports.extractCSS = () => {
+exports.extractCSS = ({ use } = {}) => {
   // Output extracted CSS to a file
   const plugin = new ExtractTextPlugin({
     // `allChunks` is needed with CommonsChunkPlugin to extract
@@ -109,7 +109,7 @@ exports.extractCSS = () => {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: ['css-loader', 'sass-loader']
+            use
           })
         }
       ]
@@ -123,7 +123,6 @@ exports.extractCSS = () => {
     ]
   };
 };
-
 
 // DEV SERVER
 

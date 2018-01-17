@@ -3,8 +3,11 @@
 // NOTE: this is raw... which is fine, but maybe there should be a processed version of this/
 @import '@monsoon_inc/monsoon-components/src/components/index';
 
+@import './import';
+
 div {
-  font-size: $default-text-size;
-  background: $light-grey;
-  border-color: $border-color;
+  // font-size: $default-text-size;
+  // background: $light-grey;
+  // border-color: $border-color;
+  display: flex;
 }
