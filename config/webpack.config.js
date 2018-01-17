@@ -11,7 +11,7 @@ const commonConfig = merge([
 const developmentConfig = merge([
   {
     entry: {
-      main: ['babel-polyfill', 'react-hot-loader/patch', PATHS.dev ],
+      main: ['babel-polyfill', require.resolve('./polyfills'), 'react-hot-loader/patch', PATHS.dev ],
     },
     output: {
       path: PATHS.build,
@@ -33,7 +33,7 @@ const developmentConfig = merge([
 const productionConfig = merge([
   {
     entry: {
-      main: PATHS.prod,
+      main: ['babel-polyfill', require.resolve('./polyfills'), 'react-hot-loader/patch', PATHS.dev ],
     },
     output: {
       path: PATHS.build,

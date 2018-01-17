@@ -10,14 +10,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export class SettingsContainer extends React.Component {
+export class DuckContainer extends React.Component {
   constructor(props) {
     super(props);
   };
 
   componentDidMount() {
-    console.log('this', this);
-    const h = this.props.dispatch({type: 'USER_FETCH_REQUESTED', payload: {txnId: 1}});
+    this.props.dispatch({type: 'USER_FETCH_REQUESTED', payload: {txnId: 1}});
   }
 
   render() {
@@ -32,4 +31,4 @@ export class SettingsContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(SettingsContainer);
+export default connect(mapStateToProps)(DuckContainer);
