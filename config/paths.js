@@ -4,4 +4,5 @@ module.exports = {
   dev: path.join(__dirname, '../src/index.js'),
   prod: path.join(__dirname, '../src/index.js'),
   build: path.join(__dirname, '../build'),
+  public: path.join(__dirname, '../public'),
 };

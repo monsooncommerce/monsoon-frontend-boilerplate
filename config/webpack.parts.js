@@ -1,6 +1,15 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
+const ManifestPlugin = require('webpack-manifest-plugin');
+const cssnano = require("cssnano");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require(
+  "optimize-css-assets-webpack-plugin"
+);
+
+const PATHS = require('./paths');
 
 // CODE
 
@@ -39,6 +48,10 @@ exports.loadJavascript = ({include, exclude} = {}) => ({
 //   }
 // });
 
+exports.minifyJavaScript = () => ({
+  plugins: [new UglifyWebpackPlugin()],
+});
+
 exports.loadRaw = ({include, exclude} = {}) => ({
   module: {
       rules: [
@@ -53,6 +66,16 @@ exports.loadRaw = ({include, exclude} = {}) => ({
 });
 
 // STYLES
+
+exports.minifyCSS = ({ options }) => ({
+  plugins: [
+    new OptimizeCSSAssetsPlugin({
+      cssProcessor: cssnano,
+      cssProcessorOptions: options,
+      canPrint: false,
+    }),
+  ],
+});
 
 exports.autoprefix = () => ({
   loader: 'postcss-loader',
@@ -99,7 +122,7 @@ exports.extractCSS = ({ use } = {}) => {
     // `allChunks` is needed with CommonsChunkPlugin to extract
     // from extracted chunks as well.
     allChunks: true,
-    filename: "[name].css",
+    filename: "static/styles/main.[contenthash:8].css",
   });
 
   return {
@@ -114,13 +137,7 @@ exports.extractCSS = ({ use } = {}) => {
         }
       ]
     },
-    plugins: [
-      new ExtractTextPlugin('style.css')
-      //if you want to pass in options, you can do so:
-      //new ExtractTextPlugin({
-      //  filename: 'style.css'
-      //})
-    ]
+    plugins: [plugin]
   };
 };
 
@@ -142,8 +159,24 @@ exports.devServer = ({host, port} = {}) => ({
 
 // SETUP
 
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin(['build'])],
+});
+
+exports.makeManifest = () => ({
+  plugins: [
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json'
+    })
+  ]
+});
+
 exports.HtmlWebpackPlugin = () => ({
   plugins: [
-    new HtmlWebpackPlugin({ title: 'NPM Lib Boiler'})
+    new HtmlWebpackPlugin({
+      inject: true,
+      title: 'Monsoon Boilerplate',
+      template: `${PATHS.public}/index.html`
+    })
   ]
 });

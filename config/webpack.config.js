@@ -16,7 +16,7 @@ const developmentConfig = merge([
     },
     output: {
       path: PATHS.build,
-      filename: '[name].js',
+      filename: '[name].dev.js',
     },
     plugins: [],
   },
@@ -38,10 +38,24 @@ const productionConfig = merge([
     },
     output: {
       path: PATHS.build,
-      filename: 'index.js',
-      libraryTarget: 'commonjs2'
+      filename: 'static/js/bundle.[hash:8].js',
+      chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     },
   },
+  parts.clean(PATHS.build),
+  parts.minifyJavaScript(),
+  parts.HtmlWebpackPlugin(),
+  parts.makeManifest(),
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      },
+      // Run cssnano in safe mode to avoid
+      // potentially unsafe transformations.
+      safe: true,
+    },
+  }),
   parts.extractCSS({ use: [
     'css-loader',
     parts.autoprefix(),
