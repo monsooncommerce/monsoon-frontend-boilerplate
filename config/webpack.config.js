@@ -1,13 +1,21 @@
 const PATHS = require('./paths');
 const parts = require('./webpack.parts');
 const merge = require('webpack-merge');
+const env = require('./env')();
+
 
 const commonConfig = merge([
   parts.loadJavascript(),
   // parts.loadMarkdown(),
   parts.loadRaw(),
-
+  parts.setFreeVariable(env.stringified),
 ]);
+
+
+
+
+
+
 
 const developmentConfig = merge([
   {
@@ -31,6 +39,13 @@ const developmentConfig = merge([
   // parts.loadMarkdown(),
 ]);
 
+
+
+
+
+
+
+
 const productionConfig = merge([
   {
     entry: {
@@ -42,7 +57,6 @@ const productionConfig = merge([
       chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     },
   },
-  parts.clean(PATHS.build),
   parts.minifyJavaScript(),
   parts.HtmlWebpackPlugin(),
   parts.makeManifest(),
@@ -66,6 +80,11 @@ const productionConfig = merge([
     }
   ]})
 ]);
+
+
+
+
+
 
 module.exports = (env) => {
   if (env === 'production') {

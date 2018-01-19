@@ -33,6 +33,7 @@
   "scripts": {
     "updatepackages": "node wipeandupdate.js && rm -rf node_modules && npm update --save-dev && npm update --save",
     "test": "node scripts/test.js --env=jsdom",
+    "prestart": "node scripts/start.js",
     "start": "webpack-dev-server --env development --config ./config/webpack.config.js",
     "prebuild": "node scripts/build.js",
     "build": "webpack --env production --config ./config/webpack.config.js --watch",

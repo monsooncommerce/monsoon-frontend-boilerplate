@@ -159,9 +159,15 @@ exports.devServer = ({host, port} = {}) => ({
 
 // SETUP
 
-exports.clean = path => ({
-  plugins: [new CleanWebpackPlugin(['build'])],
-});
+
+exports.setFreeVariable = (env) => {
+
+console.log('ENV FROM THE CONFIG \N\N\N\N', env)
+
+  return {
+    plugins: [new webpack.DefinePlugin(env)],
+  };
+};
 
 exports.makeManifest = () => ({
   plugins: [
