@@ -33,7 +33,7 @@ export class DuckContainer extends React.Component {
   }
 
   render() {
-    const jsx = this.props.users.loading ? <LoadingIndicator /> : <div className="duck-container">trains</div>;
+    const jsx = this.props.users.loading ? <LoadingIndicator /> : <div className="duck-container">{process.env.NODE_ENV}<br/>{process.env.REACT_HELLO}</div>;
 
     return (
       <div>
