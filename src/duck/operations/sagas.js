@@ -5,7 +5,6 @@ import api from './../../api';
 export function* fetchUser(action) {
   try {
     const users = yield call(api, 'fake_data', {txnId: 3});
-
     yield put({type: "USER_FETCH_SUCCEEDED", payload: {users: users.body}});
   } catch (e) {
     yield put({type: "USER_FETCH_FAILED", message: e.message});

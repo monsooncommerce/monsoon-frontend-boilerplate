@@ -11,6 +11,10 @@ const apiConfig = {
   fake_data(request, {txnId}) {
     return request
       .get(`${mockEndpoint}/users`);
+  },
+  fake_data_2(request, {txnId}) {
+    return request
+      .get(`${mockEndpoint}/posts`);
   }
 };
 
