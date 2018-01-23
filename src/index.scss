@@ -1,13 +1,7 @@
 @import '@monsoon_inc/monsoon-styles/lib/index';
-
-// NOTE: this is raw... which is fine, but maybe there should be a processed version of this/
 @import '@monsoon_inc/monsoon-components/src/components/index';
-
-@import './import';
+@import './duck/index';
 
 div {
-  // font-size: $default-text-size;
-  // background: $light-grey;
-  // border-color: $border-color;
   display: flex;
 }

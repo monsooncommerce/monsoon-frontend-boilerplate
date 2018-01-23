@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import api from './../../api';
 
+import DuckComponent from './../components/DuckComponent';
+
 import { LoadingIndicator } from '@monsoon_inc/monsoon-components';
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     users: state,
   };
@@ -37,6 +38,8 @@ export class DuckContainer extends React.Component {
 
     return (
       <div>
+        <DuckComponent foo={'what is wroasdfgsdgsdfgsdfng with the build?'}/>
+        <br/>
         {jsx}
       </div>
     );

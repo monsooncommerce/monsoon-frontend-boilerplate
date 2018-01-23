@@ -36,7 +36,7 @@
     "prestart": "node scripts/start.js",
     "start": "webpack-dev-server --env development --config ./config/webpack.config.js",
     "prebuild": "node scripts/build.js",
-    "build": "webpack --env production --config ./config/webpack.config.js --watch",
+    "build": "webpack --env production --config ./config/webpack.config.js",
     "serve": "node ./server/index.js"
   },
   "jest": {

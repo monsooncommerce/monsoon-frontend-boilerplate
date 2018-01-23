@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import './styles.js';
 
 import { containers as duckContainers } from './duck';
 import createStore from './createStore';
-import './index.scss';
+
 
 const store = createStore();
 

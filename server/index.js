@@ -31,4 +31,4 @@ app
   .use(basicRouter.allowedMethods())
   .use(require('koa-static')(__dirname + '/../build'));
 
-app.listen(8080);
+app.listen(80);
