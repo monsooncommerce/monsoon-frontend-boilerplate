@@ -4,7 +4,7 @@ import api from './../../api';
 
 import DuckComponent from './../components/DuckComponent';
 
-import { LoadingIndicator } from '@monsoon_inc/monsoon-components';
+import { LoadingIndicator, Card } from '@monsoon_inc/monsoon-components';
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +15,8 @@ const mapStateToProps = (state) => {
 export class DuckContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.exAsyncCall = this.exAsyncCall.bind(this);
   };
 
   async componentDidMount()  {
@@ -33,14 +35,25 @@ export class DuckContainer extends React.Component {
     }
   }
 
+  makeUserCards() {
+    return this.props.users.users.map( user => {
+      return <Card title={user.name}>
+        <div> {user.email} </div>
+        <div> {user.phone} </div>
+        <div> {user.website} </div>
+      </Card>;
+    });
+  }
+
   render() {
     const jsx = this.props.users.loading ? <LoadingIndicator /> : <div className="duck-container">{process.env.NODE_ENV}<br/>{process.env.REACT_HELLO}</div>;
-
+    const users = this.makeUserCards();
     return (
       <div>
-        <DuckComponent foo={'what is wroasdfgsdgsdfgsdfng with the build?'}/>
-        <br/>
-        {jsx}
+        <DuckComponent foo={''}/>
+        <div className="duck-container__user-grid">
+          { users }
+        </div>
       </div>
     );
   }

@@ -161,9 +161,6 @@ exports.devServer = ({host, port} = {}) => ({
 
 
 exports.setFreeVariable = (env) => {
-
-console.log('ENV FROM THE CONFIG \N\N\N\N', env)
-
   return {
     plugins: [new webpack.DefinePlugin(env)],
   };
