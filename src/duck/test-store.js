@@ -8,7 +8,7 @@ import rootSaga from './operations/sagas';
 export const log = [];
 
 const testMiddleware = store => next => action => {
-  log.push('hello');
+  log.push(action);
   next(action);
 };
 
@@ -17,8 +17,8 @@ const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     reducer,
-    {users: {loading: false, users: []}},
-    applyMiddleware(logger, testMiddleware, sagaMiddleware)
+    {test: [], users: {loading: false, users: []}},
+    applyMiddleware(testMiddleware, sagaMiddleware)
   );
 
   sagaMiddleware.run(rootSaga);
