@@ -8,7 +8,7 @@ import { LoadingIndicator, Card } from '@monsoon_inc/monsoon-components';
 
 const mapStateToProps = (state) => {
   return {
-    users: state,
+    users: state.users,
   };
 };
 
@@ -46,6 +46,7 @@ export class DuckContainer extends React.Component {
   }
 
   render() {
+console.log('STORE', this.props.users.users.users)
     const jsx = this.props.users.loading ? <LoadingIndicator /> : <div className="duck-container">{process.env.NODE_ENV}<br/>{process.env.REACT_HELLO}</div>;
     const users = this.makeUserCards();
     return (
