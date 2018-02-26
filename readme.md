@@ -7,9 +7,9 @@ This repo is a ready to develop React/Redux/Saga app with a Koa.js server config
 
 ### How should I use this repo?
 
-You should pull it down, take a look at the architecture and start expanding it to meet you need IN A NEW REPO OR A NEW BRANCH.
+You should pull it down, take a look at the architecture and start expanding it to meet you needs. Make sure to make your changes in a new branch!
 
-If you make a substratal change to the way the frontend works and want it to become the new standard, include the change in a new branch or merge it to development/master
+If you make substratal change to the architecture and want it to become the new standard, include the change in a new branch or merge it to development/master
 
 ### How do I get started?
 
@@ -21,7 +21,7 @@ If you make a substratal change to the way the frontend works and want it to bec
 
   `npm start`
 
-  optionally, you can run the server too
+  optionally, you can run the server
 
   `npm run serve`
 
