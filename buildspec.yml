@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    TEST_ENV_2: test_env_2_value
+
+phases:
+  install:
+    commands:
+       - npm install
+  pre_build:
+    commands:
+      # - npm run test
+      # - command
+  build:
+    commands:
+       - npm run build-staging
+      # - command
+  post_build:
+    commands:
+       - $(aws ecr get-login --no-include-email)
+       - docker build -t 437211659685.dkr.ecr.us-east-1.amazonaws.com/frontend-util-app .
+       - docker push 437211659685.dkr.ecr.us-east-1.amazonaws.com/frontend-util-app
+       - aws ecs register-task-definition --cli-input-json file://./ecs_task_config.json
+       - aws ecs update-service --cluster frontend-utils --service util-app --task-definition frontend-util-app --desired-count 1

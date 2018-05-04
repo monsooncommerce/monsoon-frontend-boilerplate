@@ -8,7 +8,9 @@ const app = new Koa();
 const basicRouter = Router();
 
 basicRouter.get('/api/foo', (ctx, next) => {
-  console.log('foo');
+  ctx.response.body = {
+    stuff: process.env
+  };
 });
 
 const handleError = async (ctx, next) => {
@@ -26,9 +28,18 @@ const handleError = async (ctx, next) => {
 app
   .use(logger())
   .use(koaBody())
-  .use(handleError)
+  // .use(handleError)
   .use(basicRouter.routes())
   .use(basicRouter.allowedMethods())
   .use(require('koa-static')(__dirname + '/../build'));
 
 app.listen(80);
+
+// const Koa = require('koa');
+// const app = new Koa();
+//
+// app.use(async ctx => {
+//   ctx.body = 'Hello World';
+// });
+//
+// app.listen(3000);
